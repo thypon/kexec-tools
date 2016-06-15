@@ -56,14 +56,14 @@ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
 			-I$(srcdir)/include \
 			-I$(shell $(CC) -print-file-name=include)
 $(PURGATORY): LDFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS)\
-			--no-undefined -nostartfiles -nostdlib -nodefaultlibs \
+			-nostartfiles -nostdlib -nodefaultlibs \
 			-e purgatory_start -r
 
 $(PURGATORY): $(PURGATORY_OBJS)
 	$(MKDIR) -p $(@D)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-#	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) --no-undefined -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
+#	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
 
 echo::
 	@echo "PURGATORY_SRCS $(PURGATORY_SRCS)"
